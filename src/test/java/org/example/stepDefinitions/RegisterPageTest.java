@@ -13,7 +13,7 @@ public class RegisterPageTest {
     @Before
     public void setUp(){
         driver = new ChromeDriver();
-        registerPage = new RegisterPage();
+        registerPage = new RegisterPage;
     }
 
     @Given("User navigate to the Register page")
