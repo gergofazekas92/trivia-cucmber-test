@@ -31,7 +31,7 @@ public class RegisterPage {
         this.password = password;
     }
 
-    private void navigateToRegisterPage(){
+    public void navigateToRegisterPage(){
         driver.get(registerUrl);
     }
     private void fillUserNameAndPassword(){
@@ -45,7 +45,6 @@ public class RegisterPage {
         registerButton.click();
     }
     public void register(){
-        navigateToRegisterPage();
         fillUserNameAndPassword();
         clickRegisterButton();
     }
