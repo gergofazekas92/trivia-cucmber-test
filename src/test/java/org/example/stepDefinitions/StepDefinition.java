@@ -11,15 +11,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StepDefinition {
-    private LoginPage loginPage;
-    private WebDriver driver;
+public class StepDefinition{
 
-    @Before
-    public void setUp() {
-        driver = new ChromeDriver();
-        loginPage = new LoginPage(driver);
-    }
+    private LoginPage loginPage = Hook.getLoginPage();
+    private WebDriver driver = Hook.getDriver();
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
@@ -32,7 +27,7 @@ public class StepDefinition {
     }
 
     @Then("I should be redirected to the home page")
-    public void iShouldBeRedirectedToTheHomePage() throws InterruptedException {
+    public void iShouldBeRedirectedToTheHomePage(){
         String actual = driver.getCurrentUrl();
         String expected = loginPage.getHomePageUrl();
         assertEquals(expected, actual);
@@ -44,8 +39,4 @@ public class StepDefinition {
         assertEquals(errorMessage, actualErrorMessage);
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
 }
