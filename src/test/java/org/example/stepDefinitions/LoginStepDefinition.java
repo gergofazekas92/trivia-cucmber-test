@@ -10,8 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class LoginStepDefinition {
-    private LoginPage loginPage = Hook.getLoginPage();
-    private WebDriver driver = Hook.getDriver();
+    private Hook hook = new Hook();
+    private LoginPage loginPage = hook.getLoginPage();
+    private WebDriver driver = hook.getDriver();
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
