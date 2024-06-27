@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class GamePage extends BasePage {
+    private static final String RED = "rgba(255, 0, 0, 1)";
+    private static final String BLUE = "rgba(173, 216, 230, 1)";
+    private static final String GREEN = "rgba(144, 238, 144, 1)";
     @FindBy(xpath = "//h1[text() = 'Home']")
     private WebElement homeHeader;
     @FindBy(xpath = "//button[text() = 'Ranked']")
@@ -25,6 +28,12 @@ public class GamePage extends BasePage {
     private WebElement question;
     @FindBy(id = "points")
     private WebElement points;
+    @FindBy(xpath = "//div[contains(text(), 'CORRECT')]")
+    private WebElement correctAnswer;
+    @FindBy(xpath = "//div[contains(text(), 'incorrect')]")
+    private WebElement wrongAnswer;
+    @FindBy(xpath = "//li[@class = 'playerList' and contains(text(), '" + USERNAME + "')]")
+    private WebElement userOnLeaderboard;
 
     public GamePage(WebDriver driver) {
         super(driver);
@@ -32,25 +41,12 @@ public class GamePage extends BasePage {
     }
 
     public void navigateToLoginPage() {
-        driver.get(getLoginPageUrl());
+        driver.get(LOGIN_PAGE_URL);
     }
 
     public void navigateToHomePage() {
-        driver.get(getHomePageUrl());
-    }
-
-    public void startGameAndAnswerAnyNumberOfQuestions(int numberOfQuestion) {
-        clickOnRankedButton();
-        String question = getQuestion();
-
-        for (int i = 0; i < numberOfQuestion; i++) {
-            selectFirstAnswer();
-            clickOnSubmitButton();
-            clickNextQuestionButton();
-            wait.until(driver -> !question.equals(getQuestion()));
-        }
-
-        clickOnCloseButton();
+        driver.get(HOME_PAGE_URL);
+        wait.until(ExpectedConditions.visibilityOf(points));
     }
 
     public void checkIfGamePageIsLoaded() {
@@ -66,8 +62,48 @@ public class GamePage extends BasePage {
         }
     }
 
-    public void answeringTheQuestion() {
-        selectFirstAnswer();
+    public boolean checkIfUserIsOnTheLeaderboard() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(userOnLeaderboard));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+
+    public boolean isAnswerGreen() {
+        wait.until(ExpectedConditions.elementToBeClickable(nextQuestionButton));
+        String color = correctAnswer.getCssValue("background-color");
+
+        return color.equals(GREEN);
+    }
+
+    public boolean isAnswerRed() {
+        wait.until(ExpectedConditions.elementToBeClickable(nextQuestionButton));
+        String color = wrongAnswer.getCssValue("background-color");
+
+        return color.equals(RED);
+    }
+
+    public boolean isAnswerBlue() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitAnswerButton));
+        String color = firstAnswer.getCssValue("background-color");
+
+        return color.equals(BLUE);
+    }
+
+    public void selectingFirstAnswer() {
+        wait.until(ExpectedConditions.visibilityOf(question));
+        firstAnswer.click();
+    }
+
+    public void giveCorrectAnswer() {
+        selectCorrectAnswer();
+        clickOnSubmitButton();
+    }
+
+    public void giveWrongAnswer() {
+        selectWrongAnswer();
         clickOnSubmitButton();
     }
 
@@ -81,17 +117,13 @@ public class GamePage extends BasePage {
         closeQuestionButton.click();
     }
 
-    public String getQuestion() {
-        wait.until(ExpectedConditions.visibilityOf(submitAnswerButton));
-        return question.getText();
-    }
-
     public void clickNextQuestionButton() {
         wait.until(ExpectedConditions.elementToBeClickable(nextQuestionButton));
         nextQuestionButton.click();
     }
 
     public int getPlayerPoints() {
+        driver.get(HOME_PAGE_URL);
         wait.until(ExpectedConditions.visibilityOf(points));
         return Integer.parseInt(points.getText().substring(8));
     }
@@ -101,9 +133,14 @@ public class GamePage extends BasePage {
         submitAnswerButton.click();
     }
 
-    private void selectFirstAnswer() {
-        wait.until(ExpectedConditions.visibilityOf(submitAnswerButton));
-        firstAnswer.click();
+    private void selectCorrectAnswer() {
+        wait.until(ExpectedConditions.visibilityOf(question));
+        correctAnswer.click();
+    }
+
+    private void selectWrongAnswer() {
+        wait.until(ExpectedConditions.visibilityOf(question));
+        wrongAnswer.click();
     }
 
     private void selectNthAnswer(int answerNumber) {

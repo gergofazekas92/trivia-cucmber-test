@@ -9,18 +9,18 @@ Feature: User Login
     Then I should be redirected to the home page
 
     Examples:
-      | username      | password |
-      | existingUser1 | pass123  |
+      | username | password      |
+      | TestUser | validPassword |
 
   Scenario Outline: Login with invalid credentials
     Given I am on the login page
     When I enter username "<username>", password "<password>" and I click the login button
-    Then I should see an error message "Username or password is incorrect"
+    Then I should see an error message "<error>"
 
     Examples:
-      | username        | password    |
-      | existingUser1   | invalidpass |
-      | existingUser1   |             |
-      | nonExistingUser | invalidpass |
+      | username        | password    | error                             |
+      | TestUser        | invalidpass | Username or password is incorrect |
+      | TestUser        |             | Username or password is incorrect |
+      | NonExistingUser | invalidpass | Username is not registered        |
 
 

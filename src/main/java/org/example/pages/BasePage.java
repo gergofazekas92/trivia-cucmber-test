@@ -23,6 +23,7 @@ public abstract class BasePage {
     public String getHomePageUrl() {
         return HOME_PAGE_URL;
     }
+
     public String getLoginPageUrl() {
         return LOGIN_PAGE_URL;
     }
