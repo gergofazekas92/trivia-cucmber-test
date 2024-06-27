@@ -31,6 +31,10 @@ public class GamePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    public void navigateToLoginPage() {
+        driver.get(getLoginPageUrl());
+    }
+
     public void navigateToHomePage() {
         driver.get(getHomePageUrl());
     }
