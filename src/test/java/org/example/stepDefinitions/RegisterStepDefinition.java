@@ -3,15 +3,19 @@ package org.example.stepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.example.pages.LoginPage;
 import org.example.pages.RegisterPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterStepDefinition{
-
-    private RegisterPage registerPage = Hook.getRegisterPage();
-    private WebDriver driver = Hook.getDriver();
+    private final RegisterPage registerPage = Hook.getRegisterPage();
+    private final LoginPage loginPage = Hook.getLoginPage();
+    private final WebDriver driver = Hook.getDriver();
+    private final WebDriverWait wait = Hook.getWait();
 
     @Given("User navigate to the Register page")
     public void userNavigateToTheRegisterPage() {
@@ -19,16 +23,27 @@ public class RegisterStepDefinition{
     }
 
     @When("User successfully enter valid {string} and {string}")
-    public void userSuccessfullyEnterValidUsernameAndPassword(String username, String password) {
+    public void userSuccessfullyEnterValidUsernameAndPassword(String username, String password) throws InterruptedException {
         registerPage.register(username,password);
     }
 
     @Then("User should be able to log in the game with {string} and {string}")
-    public void userShouldBeAbleToLogInTheGameWithAnd(String username, String password) throws InterruptedException {
-        //loginPage.login(username, password);
-        Thread.sleep(3000);
+    public void userShouldBeAbleToLogInTheGameWithUsernameAndPassword(String username, String password) throws InterruptedException {
+        wait.until(ExpectedConditions.urlToBe(loginPage.getLoginPageUrl()));
+        loginPage.login(username, password);
         String actual = driver.getCurrentUrl();
-        String expected = "http://localhost:8090/";
+        String expected = registerPage.getHomePageUrl();
         assertEquals(expected, actual);
+    }
+
+    @When("User successfully enter used {string} and {string}")
+    public void userSuccessfullyEnterUsedUserNameAndPassword(String username, String password) {
+        registerPage.register(username,password);
+    }
+
+    @Then("User should see an error message {string}")
+    public void userShouldSeeAnErrorMessage(String errorMessage) {
+        String actualErrorMessage = registerPage.getErrorMessage();
+        assertEquals(errorMessage, actualErrorMessage);
     }
 }

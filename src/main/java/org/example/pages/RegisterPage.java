@@ -22,7 +22,9 @@ public class RegisterPage extends AuthenticationForm{
     private void fillUserNameAndPassword(String userName, String password){
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         wait.until(ExpectedConditions.visibilityOf(passwordInput));
+        usernameInput.clear();
         usernameInput.sendKeys(userName);
+        passwordInput.clear();
         passwordInput.sendKeys(password);
     }
     private void clickRegisterButton(){

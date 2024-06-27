@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class LoginStepDefinition {
+public class LoginStepDefinition{
     private LoginPage loginPage = Hook.getLoginPage();
     private WebDriver driver = Hook.getDriver();
 
