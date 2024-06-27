@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StepDefinition {
+public class LoginStepDefinition {
     private LoginPage loginPage;
     private WebDriver driver;
 
