@@ -1,18 +1,15 @@
 package org.example.stepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StepDefinition{
 
+public class LoginStepDefinition {
     private LoginPage loginPage = Hook.getLoginPage();
     private WebDriver driver = Hook.getDriver();
 
@@ -28,6 +25,7 @@ public class StepDefinition{
 
     @Then("I should be redirected to the home page")
     public void iShouldBeRedirectedToTheHomePage(){
+
         String actual = driver.getCurrentUrl();
         String expected = loginPage.getHomePageUrl();
         assertEquals(expected, actual);

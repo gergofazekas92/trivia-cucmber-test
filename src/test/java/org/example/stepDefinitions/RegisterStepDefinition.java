@@ -6,7 +6,6 @@ import io.cucumber.java.en.When;
 import org.example.pages.RegisterPage;
 import org.openqa.selenium.WebDriver;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterStepDefinition{
@@ -15,12 +14,12 @@ public class RegisterStepDefinition{
     private WebDriver driver = Hook.getDriver();
 
     @Given("User navigate to the Register page")
-    public void user_navigate_to_the_register_page() {
+    public void userNavigateToTheRegisterPage() {
         registerPage.navigateToRegisterPage();
     }
 
     @When("User successfully enter valid {string} and {string}")
-    public void user_successfully_enter_valid_username_and_password(String username, String password) {
+    public void userSuccessfullyEnterValidUsernameAndPassword(String username, String password) {
         registerPage.register(username,password);
     }
 
