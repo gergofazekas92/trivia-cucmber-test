@@ -8,15 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class LoginPage extends BasePage {
-    @FindBy(css = "input[name='userName']")
-    private WebElement usernameInput;
-    @FindBy(css = "input[name='password']")
-    private WebElement passwordInput;
+public class LoginPage extends AuthenticationForm {
     @FindBy(xpath = "//button[text() = 'Login']")
     private WebElement loginButton;
-    @FindBy(tagName = "p")
-    private WebElement errorMessageDisplay;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -49,17 +43,7 @@ public class LoginPage extends BasePage {
             System.out.println("Invalid credentials, could not redirect to home page ");
         }
     }
-
-    private boolean isErrorMessagePresent() {
-        try {
-            wait.until((ExpectedConditions.visibilityOf(errorMessageDisplay)));
-            return errorMessageDisplay.isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    public String getErrorMessage() {
+        public String getErrorMessage() {
         if (isErrorMessagePresent()) {
             return errorMessageDisplay.getText();
         }
