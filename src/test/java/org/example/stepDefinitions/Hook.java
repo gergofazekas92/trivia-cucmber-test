@@ -9,9 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Hook {
 
-    private WebDriver driver;
-    private RegisterPage registerPage;
-    private LoginPage loginPage;
+    private static WebDriver driver;
+    private static RegisterPage registerPage;
+    private static LoginPage loginPage;
 
     @Before
     public void setUp(){
@@ -24,15 +24,15 @@ public class Hook {
         driver.quit();
     }
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
     }
 
-    public RegisterPage getRegisterPage() {
+    public static RegisterPage getRegisterPage() {
         return registerPage;
     }
 
-    public LoginPage getLoginPage() {
+    public static LoginPage getLoginPage() {
         return loginPage;
     }
 }

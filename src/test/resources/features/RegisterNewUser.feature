@@ -7,4 +7,4 @@ Feature: Register as a new User
 
     Examples:
       | username | password |
-      | newUser5 | newUser5 |
+      | newUser6 | newUser5 |

@@ -28,7 +28,7 @@ public class GameStepDefinition {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         gamePage = new GamePage(driver);
-        gamePage.navigateToHomePage();
+        loginPage.navigateToLoginPage();
         loginPage.login(USERNAME, PASSWORD);
     }
 

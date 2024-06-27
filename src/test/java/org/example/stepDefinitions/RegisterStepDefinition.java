@@ -10,10 +10,9 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RegisterStepDefinition{
-    private final Hook hook = new Hook();
-    private final RegisterPage registerPage = hook.getRegisterPage();
-    private final LoginPage loginPage = hook.getLoginPage();
-    private final WebDriver driver = hook.getDriver();
+    private final RegisterPage registerPage = Hook.getRegisterPage();
+    private final LoginPage loginPage = Hook.getLoginPage();
+    private final WebDriver driver = Hook.getDriver();
 
     @Given("User navigate to the Register page")
     public void userNavigateToTheRegisterPage() {
