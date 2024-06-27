@@ -1,6 +1,5 @@
 package org.example.pages;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,6 +35,7 @@ public class LoginPage extends AuthenticationForm {
     public void login(String username, String password) {
         enterUsername(username);
         enterPassword(password);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
         try {
             wait.until(ExpectedConditions.urlToBe(HOME_PAGE_URL));

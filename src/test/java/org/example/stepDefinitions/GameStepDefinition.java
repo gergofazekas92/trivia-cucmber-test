@@ -1,40 +1,28 @@
 package org.example.stepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.pages.GamePage;
 import org.example.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameStepDefinition {
-    public static final String baseUrl = "http://localhost:8090/";
     public static final String USERNAME = "testuser";
     public static final String PASSWORD = "testuser";
     public static final int NUMBER_OF_QUIZES = 10;
-    private LoginPage loginPage;
-    private GamePage gamePage;
-    private WebDriver driver;
+    private final LoginPage loginPage = Hook.getLoginPage();
+    private final GamePage gamePage = Hook.getGamePage();
+    private final WebDriver driver = Hook.getDriver();
     private String question;
     private int points;
 
-    @Before
-    public void setUp() {
-        driver = new ChromeDriver();
-        loginPage = new LoginPage(driver);
-        gamePage = new GamePage(driver);
-        loginPage.navigateToLoginPage();
+    @Given("I am logged in")
+    public void loggingIn() {
+        gamePage.navigateToLoginPage();
         loginPage.login(USERNAME, PASSWORD);
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
 
     @Given("I am on the game page")
