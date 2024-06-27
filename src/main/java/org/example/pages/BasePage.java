@@ -1,6 +1,10 @@
 package org.example.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -8,6 +12,7 @@ import java.time.Duration;
 public abstract class BasePage {
     protected static final String LOGIN_PAGE_URL = "http://localhost:8090/";
     protected static final String HOME_PAGE_URL = "http://localhost:8090/home";
+    protected static final String REGISTER_PAGE_URL = "http://localhost:8090/register";
     protected static final int WAIT_DURATION_SEC = 5;
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -23,4 +28,5 @@ public abstract class BasePage {
     public String getLoginPageUrl() {
         return LOGIN_PAGE_URL;
     }
+
 }
