@@ -7,4 +7,13 @@ Feature: Register as a new User
 
     Examples:
       | username | password |
-      | newUser109 | newUser5 |
+      | newUser113 | newUser5 |
+
+  Scenario Outline: Used username cannot register again
+    Given User navigate to the Register page
+    When User successfully enter used "<username>" and "<password>"
+    Then User should see an error message "Username already in use, please choose another!"
+
+    Examples:
+      | username | password |
+      | testuser | testuser |

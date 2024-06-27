@@ -43,10 +43,4 @@ public class LoginPage extends AuthenticationForm {
             System.out.println("Invalid credentials, could not redirect to home page ");
         }
     }
-        public String getErrorMessage() {
-        if (isErrorMessagePresent()) {
-            return errorMessageDisplay.getText();
-        }
-        return "No error message";
-    }
 }

@@ -35,4 +35,15 @@ public class RegisterStepDefinition{
         String expected = registerPage.getHomePageUrl();
         assertEquals(expected, actual);
     }
+
+    @When("User successfully enter used {string} and {string}")
+    public void userSuccessfullyEnterUsedUserNameAndPassword(String username, String password) {
+        registerPage.register(username,password);
+    }
+
+    @Then("User should see an error message {string}")
+    public void userShouldSeeAnErrorMessage(String errorMessage) {
+        String actualErrorMessage = registerPage.getErrorMessage();
+        assertEquals(errorMessage, actualErrorMessage);
+    }
 }
