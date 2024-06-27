@@ -9,6 +9,8 @@ public abstract class BasePage {
     protected static final String LOGIN_PAGE_URL = "http://localhost:8090/";
     protected static final String HOME_PAGE_URL = "http://localhost:8090/home";
     protected static final String REGISTER_PAGE_URL = "http://localhost:8090/register";
+    protected static final String USERNAME = "TestUser";
+    protected static final String PASSWORD = "validPassword";
     protected static final int WAIT_DURATION_SEC = 5;
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -25,4 +27,11 @@ public abstract class BasePage {
         return LOGIN_PAGE_URL;
     }
 
+    public String getUsername() {
+        return USERNAME;
+    }
+
+    public String getPassword() {
+        return PASSWORD;
+    }
 }

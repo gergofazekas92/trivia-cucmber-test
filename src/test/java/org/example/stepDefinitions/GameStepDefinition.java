@@ -10,8 +10,6 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameStepDefinition {
-    public static final String USERNAME = "testuser";
-    public static final String PASSWORD = "testuser";
     public static final int NUMBER_OF_QUIZES = 10;
     private final LoginPage loginPage = Hook.getLoginPage();
     private final GamePage gamePage = Hook.getGamePage();
@@ -22,7 +20,7 @@ public class GameStepDefinition {
     @Given("I am logged in")
     public void loggingIn() {
         gamePage.navigateToLoginPage();
-        loginPage.login(USERNAME, PASSWORD);
+        loginPage.login(loginPage.getUsername(), loginPage.getPassword());
     }
 
     @Given("I am on the game page")
