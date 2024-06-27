@@ -32,7 +32,7 @@ public class LoginStepDefinition {
     }
 
     @Then("I should be redirected to the home page")
-    public void iShouldBeRedirectedToTheHomePage() throws InterruptedException {
+    public void iShouldBeRedirectedToTheHomePage() {
         String actual = driver.getCurrentUrl();
         String expected = loginPage.getHomePageUrl();
         assertEquals(expected, actual);
