@@ -13,7 +13,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameStepDefinition {
-    public static final String baseUrl = "http://localhost:8090/";
     public static final String USERNAME = "testuser";
     public static final String PASSWORD = "testuser";
     public static final int NUMBER_OF_QUIZES = 10;
@@ -28,7 +27,7 @@ public class GameStepDefinition {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         gamePage = new GamePage(driver);
-        gamePage.navigateToHomePage();
+        gamePage.navigateToLoginPage();
         loginPage.login(USERNAME, PASSWORD);
     }
 
