@@ -1,5 +1,6 @@
 package org.example.stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,19 +11,16 @@ import org.openqa.selenium.WebDriver;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameStepDefinition {
-    public static final String USERNAME = "testuser";
-    public static final String PASSWORD = "testuser";
-    public static final int NUMBER_OF_QUIZES = 10;
+    public static final int NUMBER_OF_QUIZZES = 10;
     private final LoginPage loginPage = Hook.getLoginPage();
     private final GamePage gamePage = Hook.getGamePage();
     private final WebDriver driver = Hook.getDriver();
-    private String question;
     private int points;
 
     @Given("I am logged in")
     public void loggingIn() {
         gamePage.navigateToLoginPage();
-        loginPage.login(USERNAME, PASSWORD);
+        loginPage.login(loginPage.getUsername(), loginPage.getPassword());
     }
 
     @Given("I am on the game page")
@@ -57,34 +55,81 @@ public class GameStepDefinition {
         assertFalse(isGamePresent);
     }
 
-    @Given("I answered a question")
-    public void answeringTheQuestion() {
-        gamePage.clickOnRankedButton();
-        gamePage.answeringTheQuestion();
-        question = gamePage.getQuestion();
-    }
-
-    @When("I click the Next button")
-    public void clickingNextButton() {
-        gamePage.clickNextQuestionButton();
-    }
-
-    @Then("I see a new question")
-    public void checkingIsQuestionChanged() {
-        String actualQuestion = gamePage.getQuestion();
-        assertNotEquals(question, actualQuestion);
-    }
-
-    @When("I answer a few questions")
-    public void answeringQuestions() {
+    @Given("I don't have points")
+    public void iDonTHavePoints() {
         points = gamePage.getPlayerPoints();
-        gamePage.startGameAndAnswerAnyNumberOfQuestions(NUMBER_OF_QUIZES);
     }
 
-    @Then("I want to see my points increased")
-    public void checkIfPointsWereRegistered() {
-        gamePage.navigateToHomePage();
+    @When("I submitted the wrong answer")
+    public void iSubmittedTheWrongAnswer() {
+        gamePage.giveWrongAnswer();
+    }
+
+    @Then("I still don't have points")
+    public void iStillDonTHavePoints() {
         int actualPoints = gamePage.getPlayerPoints();
-        assertTrue(actualPoints > points);
+
+        assertEquals(points, actualPoints);
+    }
+
+    @When("I submitted the right answer")
+    public void iSubmittedTheRightAnswer() {
+        gamePage.giveCorrectAnswer();
+    }
+
+    @Then("my points are increased")
+    public void myPointsAreIncreased() {
+        driver.get(gamePage.getHomePageUrl());
+        int actualPoints = gamePage.getPlayerPoints();
+
+        assertTrue(points < actualPoints);
+    }
+
+    @When("I give several correct answers")
+    public void iGiveSeveralCorrectAnswers() {
+        for (int i = 0; i < NUMBER_OF_QUIZZES; i++) {
+            gamePage.giveCorrectAnswer();
+            gamePage.clickNextQuestionButton();
+        }
+
+        gamePage.clickOnCloseButton();
+    }
+
+    @Then("my name is on the leaderboard")
+    public void myNameIsOnTheLeaderboard() {
+        boolean isUserPresentOnLeaderboard = gamePage.checkIfUserIsOnTheLeaderboard();
+
+        assertTrue(isUserPresentOnLeaderboard);
+    }
+
+    @Then("the answer turns green")
+    public void theAnswerTurnsGreen() {
+        boolean isItGreen = gamePage.isAnswerGreen();
+
+        assertTrue(isItGreen);
+    }
+
+    @Then("the answer turns red")
+    public void theAnswerTurnsRed() {
+        boolean isItRed = gamePage.isAnswerRed();
+
+        assertTrue(isItRed);
+    }
+
+    @When("refreshed the page")
+    public void refreshedThePage() {
+        gamePage.navigateToHomePage();
+    }
+
+    @When("I select any answer")
+    public void selectingFirstAnswer() {
+        gamePage.selectingFirstAnswer();
+    }
+
+    @Then("the answer turns blue")
+    public void theAnswerTurnsBlue() {
+        boolean isItBlue = gamePage.isAnswerBlue();
+
+        assertTrue(isItBlue);
     }
 }
