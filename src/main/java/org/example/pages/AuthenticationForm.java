@@ -28,10 +28,10 @@ public abstract class AuthenticationForm extends BasePage{
             return false;
         }
     }
-    public String getErrorMessage() {
+    public Optional<String> getErrorMessage() { 
         if (isErrorMessagePresent()) {
-            return errorMessageDisplay.getText();
+            return Optional.of(errorMessageDisplay.getText());
         }
-        return "No error message";
+        return Optional.empty();
     }
 }

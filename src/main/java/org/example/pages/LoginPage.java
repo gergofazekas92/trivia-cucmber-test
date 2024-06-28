@@ -22,7 +22,7 @@ public class LoginPage extends AuthenticationForm {
 
     private void enterUsername(String username) {
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
-        usernameInput.clear();
+        usernameInput.clear();  // possibility to cover up a bug when input field has data from previous login for example
         usernameInput.sendKeys(username);
     }
 

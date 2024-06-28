@@ -6,6 +6,7 @@ Feature: User Login
   Scenario Outline: Successful Login
     Given I am on the login page
     When I enter username "<username>", password "<password>" and I click the login button
+    # code repetition to be removed (see register feature)
     Then I should be redirected to the home page
 
     Examples:
