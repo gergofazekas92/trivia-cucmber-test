@@ -33,4 +33,8 @@ public class RegisterPage extends AuthenticationForm{
         fillUserNameAndPassword(userName, password);
         clickRegisterButton();
     }
+
+    public String getErrorMessage() {
+        return "Username already in use, please choose another!";
+    }
 }

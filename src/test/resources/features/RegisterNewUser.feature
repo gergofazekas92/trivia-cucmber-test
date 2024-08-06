@@ -1,4 +1,7 @@
 Feature: Register as a new User
+  As a new user
+  I want to be able to create a new account
+  So I can log in to the main page
 
   Scenario Outline: Newly registered User can login to the game
     Given User navigate to the Register page
@@ -7,4 +10,13 @@ Feature: Register as a new User
 
     Examples:
       | username | password |
-      | newUser5 | newUser5 |
+      | newUser113 | newUser5 |
+
+  Scenario Outline: Used username cannot register again
+    Given User navigate to the Register page
+    When User successfully enter used "<username>" and "<password>"
+    Then User should see an error message "Username already in use, please choose another!"
+
+    Examples:
+      | username | password |
+      | testuser | testuser |
