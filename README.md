@@ -5,7 +5,7 @@ BDD tests for a quiz app
 
 ## Overview
 
-This project focuses on high-level UI testing, specifically using end-to-end (E2E) and blackbox testing methodologies. It aims to ensure that the application functions correctly from a user's perspective by verifying the complete system for data flow, interactions, and overall user experience. The project follows the Page Object Model (POM) structure to enhance maintainability and readability of test scripts.
+This project focuses on high-level UI testing, specifically using end-to-end (E2E) and blackbox testing methodologies. It aims to ensure that the application functions correctly from a user's perspective by verifying the complete system for data flow, interactions, and overall user experience. The project follows the Page Object Model (POM) structure to enhance maintainability and readability of test scripts and utilizes Behavior-Driven Development (BDD) to write clear and understandable tests.
 
 ![JAVA framework](https://img.shields.io/badge/framework-JAVA-red)
 
