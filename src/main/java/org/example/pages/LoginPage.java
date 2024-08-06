@@ -35,17 +35,12 @@ public class LoginPage extends AuthenticationForm {
     public void login(String username, String password) {
         enterUsername(username);
         enterPassword(password);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         loginButton.click();
         try {
             wait.until(ExpectedConditions.urlToBe(HOME_PAGE_URL));
         } catch (TimeoutException ignore) {
             System.out.println("Invalid credentials, could not redirect to home page ");
         }
-    }
-        public String getErrorMessage() {
-        if (isErrorMessagePresent()) {
-            return errorMessageDisplay.getText();
-        }
-        return "No error message";
     }
 }
