@@ -13,7 +13,13 @@ This project focuses on high-level UI testing, specifically using end-to-end (E2
 
 ![cucumber framework](https://img.shields.io/badge/framework-cucumber-gree)
 
+## SUT
 
+- Description: the project under test is a web application where you can answer quizzes and achive high score on the leaderboard
+
+- Repository: https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-java-petergubicza
+
+- Installation: follow the Installation step in the README !
 
 
 ## UserStories
