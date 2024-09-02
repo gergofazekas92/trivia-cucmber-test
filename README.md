@@ -77,4 +77,3 @@ To run tests, run the following command
 - Gergő Fazekas - gefazekas92@gmail.com
 - Dávid Gömöri - gomori.david@gmail.com
 
-Project - https://github.com/gergofazekas92/trivia-cucumber-test/edit/main/README.md
